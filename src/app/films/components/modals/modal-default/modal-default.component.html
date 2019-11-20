@@ -1,0 +1,17 @@
+<div @starModal class="modal d-block" *ngIf="openModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title font-weight-bolder" id="exampleModalLabel">{{ titleModal }}</h5>
+                <button type="button" class="close text-white" (click)="isCloseModal(false)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div @starOverlay class="overlay-modal" *ngIf="openModal"></div>

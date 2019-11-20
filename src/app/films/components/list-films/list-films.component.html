@@ -1,0 +1,62 @@
+<div class="wrap-list py-4">
+  <div class="row">
+    <div class="col-sm-9">
+      <h2>Lista items</h2>
+    </div>
+    <div class="col-sm-3 text-right">
+      <button type="button" class="btn btn-primary ml-auto" (click)="isOpenModalAdd()">Agregar película</button>
+    </div>
+  </div>
+
+  <!-- <table class="table table-striped table-condensed">
+
+                <thead class="thead-dark">
+                  <tr class="row mx-0">
+                    <th class="col-sm-1">ID</th>
+                    <th class="col-sm-4">Nombre</th>
+                    <th class="col-sm-3">F. Publicación</th>
+                    <th class="col-sm-2">Estado</th>
+                    <th class="col-sm-2 text-center">Actualizar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row mx-0">
+                    <td class="col-sm-1">1</td>
+                    <td class="col-sm-4"><span>Mark</span></td>
+                    <td class="col-sm-3">Otto</td>
+                    <td class="col-sm-2">@mdo</td>
+                    <td class="col-sm-2 text-center">
+                        <button  type="button" (click)="isOpenModalEdit()" class="btn shadow-none mr-2"><i class="far fa-edit text-primary"></i></button>
+                        <button type="button" class="btn shadow-none"><i class="far fa-trash-alt text-danger"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table> -->
+  <div class="table my-4 shadow p-2">
+    <div class="row table-head bg-dark text-white py-2 mx-0 mb-2 rounded">
+      <div class="col-sm-1">ID</div>
+      <div class="col-sm-4">Nombre</div>
+      <div class="col-sm-3">F. Publicación</div>
+      <div class="col-sm-2">Estado</div>
+      <div class="col-sm-2 text-right">Actualizar</div>
+    </div>
+
+    <div class="row table-body bg-light text-primary py-2 mx-0 rounded mb-2 border align-items-center"
+    *ngFor="let film of listFilms; let i = index">
+      <div class="col-sm-1">{{ film.id }}</div>
+      <div class="col-sm-4">{{ film.title }}</div>
+      <div class="col-sm-3">{{ film.datepublic }}</div>
+      <div class="col-sm-2">{{ film.status }}</div>
+      <div class="col-sm-2 text-right">
+          <button  type="button" (click)="isOpenModalEdit()" class="btn p-1 shadow-none mr-3"><i class="far fa-edit text-primary"></i></button>
+          <button type="button" class="btn p-1 shadow-none"><i class="far fa-trash-alt text-danger"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<app-modal-add-film [openModal]="openModalAdd" (closeModal)="iscloseModalAdd($event)"></app-modal-add-film>
+
+<app-modal-edit-film [openModal]="openModalEdit" (closeModal)="iscloseModalEdit($event)"></app-modal-edit-film>

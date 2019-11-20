@@ -1,0 +1,21 @@
+<app-modal-default  [openModal]="openModal" [titleModal]="titleModal" (closeModal)="isCloseModal($event)">
+    <form action="">
+        <div class="form-group">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de Película">
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Fecha de Publicación">
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="exampleSelect1">
+              <option disabled="disabled">Selección de Estado</option>
+              <option>En cartelera</option>
+              <option>En estreno</option>
+              <option>Fuera de cartelera</option>
+            </select>
+          </div>
+    </form>
+    <div class="modal-footer text-right border-0">
+        <button type="button" class="btn btn-success" (click)="isCloseModal(false)">Guardar</button>
+    </div>
+</app-modal-default>
