@@ -32,7 +32,9 @@ import { FilmsService } from './films/films.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     FilmsService

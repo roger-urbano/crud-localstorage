@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Film } from './models/film';
+import { filter } from 'minimatch';
 
 @Injectable({
   providedIn: 'root'
@@ -11,41 +12,52 @@ export class FilmsService {
   constructor() {
     this.listFilms = [];
 
-    this.listFilms = [
-      {id: 1, title: 'Vengadores', datepublic: '17-12-20', status: 'Cartelera' },
-      {id: 2, title: 'Wason', datepublic: '17-12-20', status: 'Estreno' },
-      {id: 3, title: 'Infiltrados', datepublic: '17-12-20', status: 'Cartelera' },
-      {id: 4, title: 'Dumbo', datepublic: '17-12-20', status: 'Fuera de cartelera' },
-      {id: 5, title: 'Spiderman', datepublic: '17-12-20', status: 'Estreno' },
-    ];
-
   }
 
-  getListFilms() {
-    localStorage.setItem('listFilms', JSON.stringify(this.listFilms));
-  }
 
-  getFilms() {
-    if(localStorage.getItem('listFilms') === null ) {
-      this.listFilms = [];
+  getFilms(): Film[] {
+    if (localStorage.getItem('listFilms') === null) {
+      this.listFilms = [
+        { idFilm: 1, imgFilm: '../../../../assets/images/poster-vengadores.jpg',titleFilm: 'Vengadores', datePublicFilm: '17-12-20', statusFilm: 'Cartelera' },
+        { idFilm: 2, imgFilm: '../../../../assets/images/poster-joker.jpg', titleFilm: 'Wason', datePublicFilm: '17-12-20', statusFilm: 'Estreno' },
+        { idFilm: 3, imgFilm: '../../../../assets/images/poster-dumbo.jpg', titleFilm: 'Dumbo', datePublicFilm: '17-12-20', statusFilm: 'Fuera de cartelera' },
+        { idFilm: 4, imgFilm: '../../../../assets/images/poster-spiderman.jpg', titleFilm: 'Spiderman', datePublicFilm: '17-12-20', statusFilm: 'Estreno' },
+      ];
+
+      // Convertir a objeto el string de localstorage.
+      localStorage.setItem('listFilms', JSON.stringify(this.listFilms));
+
     } else {
+      // Convertir string del localstorage a Objetos
       this.listFilms = JSON.parse(localStorage.getItem('listFilms'));
     }
     return this.listFilms;
   }
 
-  addFilms(film: Film): void {
-    this.listFilms.unshift(film);
-    let listFilms;
+  addFilm(film: Film): void {
+    this.listFilms.push(film);
+    let films;
+    localStorage.setItem('listFilms', JSON.stringify(this.listFilms));
 
-    if(localStorage.getItem('listFilms') === null) {
-      listFilms = [];
-      listFilms.unshift(film);
-      localStorage.setItem('listFilms', JSON.stringify(film));
+    if (localStorage.getItem('films') === null) {
+      films = [];
+      films.push(film);
+      localStorage.setItem('films', JSON.stringify(films));
     } else {
-        listFilms = JSON.parse(localStorage.getItem('listFilms'));
-        listFilms.unshift(film);
-        localStorage.setItem('listFilms', JSON.stringify(film));
+      films = JSON.parse(localStorage.getItem('films'));
+      films.push(film);
+      localStorage.setItem('films', JSON.stringify(films));
     }
+  }
+
+  removeFilm(idFilm: number) {
+    let id = idFilm;
+    // Eliminar film por id.
+    for (let i = 0; i < this.listFilms.length; i++) {
+      if (id == this.listFilms[i].idFilm) {
+        this.listFilms.splice(i, 1);
+      }
+    }
+    localStorage.setItem('listFilm', JSON.stringify(this.listFilms));
   }
 }

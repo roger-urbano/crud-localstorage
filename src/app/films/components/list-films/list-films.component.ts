@@ -15,7 +15,7 @@ export class ListFilmsComponent implements OnInit {
   public listFilms: Film[];
 
   constructor(private filmsService: FilmsService) {
-    this.filmsService.getListFilms();
+    this.filmsService.getFilms();
   }
 
   ngOnInit() {
@@ -39,6 +39,15 @@ export class ListFilmsComponent implements OnInit {
 
   iscloseModalEdit($event) {
     this.openModalEdit = $event;
+  }
+
+  filmAdd(film: Film) {
+    this.filmsService.addFilm(film);
+  }
+
+  removeFilm(idFilm: number) {
+    console.log("eliminar por id")
+   this.filmsService.removeFilm(idFilm);
   }
 
 

@@ -1,8 +1,10 @@
 export interface Film {
-    id: number;
-    title: string;
-    datepublic: any;
-    status: string;
+    idFilm: number;
+    imgFilm?: any;
+    titleFilm: string;
+    datePublicFilm: any;
+    statusFilm: string;
+    hoursFilm?: 'any';
 }
 
 
