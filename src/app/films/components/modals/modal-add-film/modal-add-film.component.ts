@@ -4,6 +4,7 @@ import { FilmsService } from 'src/app/films/films.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-modal-add-film',
   templateUrl: './modal-add-film.component.html',
@@ -12,19 +13,34 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 export class ModalAddFilmComponent implements OnInit {
 
   @Input() public openModal: boolean;
+  @Input() public titleModal: string;
+  @Input() public typeModal: number;
+  @Input() public filmEdited: Film;
+
   @Output() public closeModal: EventEmitter<any> = new EventEmitter();
   @Output() public filmAdd: EventEmitter<any> = new EventEmitter();
-  listFilm: Film[];
+  public listFilm: Film[];
+  public film: Film;
   formAddFilm: FormGroup; // Formulario Agregrar Película.
+  formEditFilm: FormGroup; // Formulario Agregrar Película.
+  public data: Date;
 
-  public titleModal: string;
 
   constructor(private filmsService: FilmsService) {
 
     /*  inpust de Formulario */
     this.formAddFilm = new FormGroup({
       idFilm: new FormControl('', [Validators.required]),
-      imgFilm: new FormControl('', [Validators.required]),
+      imgFilm: new FormControl(''),
+      titleFilm: new FormControl('', [Validators.required]),
+      datePublicFilm: new FormControl('', [Validators.required]),
+      statusFilm: new FormControl('', [Validators.required]),
+    });
+
+    /*  inpust de Formulario */
+    this.formEditFilm = new FormGroup({
+      idFilm: new FormControl('', [Validators.required]),
+      imgFilm: new FormControl(''),
       titleFilm: new FormControl('', [Validators.required]),
       datePublicFilm: new FormControl('', [Validators.required]),
       statusFilm: new FormControl('', [Validators.required]),
@@ -33,7 +49,10 @@ export class ModalAddFilmComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleModal = 'Agregar nueva película';
+  }
+
+  onValueChange(value: Date): void {
+    this.data = value;
   }
 
   isCloseModal($event) {
@@ -41,13 +60,23 @@ export class ModalAddFilmComponent implements OnInit {
     this.closeModal.emit();
   }
 
-  addFilm(event) {
-    this.filmAdd.emit(this.formAddFilm.value);
-    console.log(this.formAddFilm.value);
-
-    // if (this.formAddFilm.valid) {
-    //   this.filmsService.addFilm(this.formAddFilm.value);
-    // }
+  addFilm() {
+    if (this.formAddFilm.valid) {
+      this.filmAdd.emit(this.formAddFilm.value);
+    }
+    this.resetForm();
   }
+  
+  editFilm(event) {
+    event.preventDefault();
+    this.film  = this.filmEdited;
+    this.filmsService.editFilm(this.film);
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.formAddFilm.reset();
+   }
+
 
 }

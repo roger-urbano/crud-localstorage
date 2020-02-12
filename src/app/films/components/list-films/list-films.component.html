@@ -4,7 +4,7 @@
       <h2>Lista items</h2>
     </div>
     <div class="col-sm-3 text-right">
-      <button type="button" class="btn btn-primary ml-auto" (click)="isOpenModalAdd()">Agregar película</button>
+      <button type="button" class="btn btn-primary ml-auto" (click)="isOpenModalAdd(1)">Agregar película</button>
     </div>
   </div>
 
@@ -12,8 +12,8 @@
     <div class="row table-head bg-dark text-white py-2 mx-0 mb-2 rounded">
       <div class="col-sm-2">Poster</div>
       <div class="col-sm-1">ID</div>
-      <div class="col-sm-3">Nombre</div>
-      <div class="col-sm-2">F. Publicación</div>
+      <div class="col-sm-2">Nombre</div>
+      <div class="col-sm-3">F. Publicación</div>
       <div class="col-sm-2">Estado</div>
       <div class="col-sm-2 text-right">Actualizar</div>
     </div>
@@ -24,11 +24,11 @@
         <figure class="figure-film m-0"><img [src]="film.imgFilm" alt=""></figure>
       </div>
       <div class="col-sm-1">{{ film.idFilm }} </div>
-      <div class="col-sm-3">{{ film.titleFilm }}</div>
-      <div class="col-sm-2">{{ film.datePublicFilm }}</div>
+      <div class="col-sm-2">{{ film.titleFilm }}</div>
+      <div class="col-sm-3">{{ film.datePublicFilm }} </div>
       <div class="col-sm-2">{{ film.statusFilm }}</div>
       <div class="col-sm-2 text-right">
-          <button  type="button" (click)="isOpenModalEdit()" class="btn p-1 shadow-none mr-3">
+          <button  type="button" (click)="isOpenModalAdd(2, film.idFilm)" class="btn p-1 shadow-none mr-3">
             <i class="far fa-edit text-primary"></i>
           </button>
           <button type="button" class="btn p-1 shadow-none" (click)="removeFilm(film.idFilm)">
@@ -43,6 +43,10 @@
 <app-modal-add-film 
     [openModal]="openModalAdd"
     (filmAdd)="filmAdd($event)"
-    (closeModal)="iscloseModalAdd($event)"></app-modal-add-film>
+    [titleModal]="titleModal"
+    [typeModal]="typeModal"
+    (closeModal)="iscloseModalAdd($event)"
+    [filmEdited]="filmEdited">
+  </app-modal-add-film>
 
 <app-modal-edit-film [openModal]="openModalEdit" (closeModal)="iscloseModalEdit($event)"></app-modal-edit-film>

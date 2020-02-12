@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-navs-sidebar',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavsSidebarComponent implements OnInit {
 
-  constructor() { }
+  scrollActive: boolean;
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
 
+  @HostListener('window:scroll')
+    checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (scrollPosition >= 100 ) {
+      this.scrollActive = true;
+    } else {
+      this.scrollActive = false;
+    }
+  }
 }

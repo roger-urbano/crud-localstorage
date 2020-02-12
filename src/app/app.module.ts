@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +17,8 @@ import { ModalAddFilmComponent } from './films/components/modals/modal-add-film/
 import { ModalEditFilmComponent } from './films/components/modals/modal-edit-film/modal-edit-film.component';
 import { ViewListFilmComponent } from './films/views/view-list-film/view-list-film.component';
 import { FilmsService } from './films/films.service';
+
+
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import { FilmsService } from './films/films.service';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
     FilmsService

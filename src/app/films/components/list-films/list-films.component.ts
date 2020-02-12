@@ -11,8 +11,12 @@ export class ListFilmsComponent implements OnInit {
 
   public openModalAdd: boolean;
   public openModalEdit: boolean;
+  public titleModal: string;
+  public typeModal: number;
 
   public listFilms: Film[];
+  public filmEdited: Film;
+  public data: Date;
 
   constructor(private filmsService: FilmsService) {
     this.filmsService.getFilms();
@@ -25,8 +29,24 @@ export class ListFilmsComponent implements OnInit {
   }
 
 
-  isOpenModalAdd() {
+  
+
+
+
+  isOpenModalAdd(typeModal: number, idFilm: number) {
     this.openModalAdd = true;
+    this.typeModal = typeModal;
+    if (this.typeModal == 1) {
+      this.titleModal = 'Agregar nueva película';
+    } else if (this.typeModal == 2) {
+      this.titleModal = 'Editar película';
+
+      for (let i = 0; i < this.listFilms.length; i++) {
+        if (idFilm == this.listFilms[i].idFilm) {
+          this.filmEdited = this.listFilms[i];
+        }
+      }
+    }
   }
 
   iscloseModalAdd($event) {
@@ -47,9 +67,7 @@ export class ListFilmsComponent implements OnInit {
 
   removeFilm(idFilm: number) {
     console.log("eliminar por id")
-   this.filmsService.removeFilm(idFilm);
+    this.filmsService.removeFilm(idFilm);
   }
-
-
 
 }
